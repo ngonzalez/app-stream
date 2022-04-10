@@ -1,25 +1,21 @@
-class StreamWorker
+class EncodeWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :default, :retry => true, :backtrace => true
 
   def perform audio_file_id
     audio_file = AudioFile.find(audio_file_id).decorate
-    return if File.exists?(audio_file.m3u8_path)
-    create_m3u8(audio_file)
-    RedisDb.client.del("stream:#{audio_file.id}")
+    return if File.exists?(audio_file.temp_file)
+    file = Down.download("http://audiobackup12.ddns.net:8080/#{BACKUP_SERVER_FOLDER}/#{audio_file.path}")
+    strip_metadata(file.path, audio_file.temp_file) if ['AAC', 'ALAC', 'MP3'].include?(audio_file.format_name)
+    encode(file.path, audio_file.temp_file) if ['AIFF', 'WAV'].include?(audio_file.format_name)
+    RedisDb.client.del("file:#{audio_file.id}")
   end
 
   private
-  def create_m3u8 audio_file
-    `ffmpeg -y \
-    -i #{audio_file.file.path} \
-    -codec copy \
-    -loglevel 0 \
-    -map 0 \
-    -f hls \
-    -hls_time 10 \
-    -hls_playlist_type vod \
-    -hls_segment_filename "/tmp/hls/#{audio_file.id}_%d.ts" \
-    "/tmp/hls/#{audio_file.id}.m3u8"`
+  def strip_metadata source, destination
+    `ffmpeg -y -i #{source} -map 0:a -codec:a copy -map_metadata -1 #{destination} -nostats -loglevel 0`
+  end
+  def encode source, destination
+    `lame --silent -b 320 -ms #{source} #{destination}`
   end
 end
