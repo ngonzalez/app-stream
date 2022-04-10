@@ -1,0 +1,10 @@
+.DS_Store
+log/*.log
+.bundle
+dragonfly
+tmp
+public/
+gcp.json
+.env
+
+/config/master.key

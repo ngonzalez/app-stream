@@ -1,0 +1,32 @@
+---
+AAC:
+  :tags:
+    - AAC
+  :extensions:
+    - m4a
+    - mp4
+    - aac
+AIFF:
+  :tags:
+    - AIFF
+  :extensions:
+    - aif
+    - aiff
+ALAC:
+  :tags:
+    - ALAC
+  :extensions:
+    - m4a
+MP3:
+  :tags:
+    - Audio file with ID3
+    - MPEG ADTS
+  :extensions:
+    - mp3
+  :default:
+    - default
+WAV:
+  :tags:
+    - WAV
+  :extensions:
+    - wav
