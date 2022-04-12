@@ -4,13 +4,9 @@ class AudioFilesController < ApplicationController
   before_action :create_m3u8, if: -> { file_exists? && !m3u8_exists? }
 
   def show
-    respond_to do |format|
-      format.json do
-        render json: {
-          m3u8_exists: m3u8_exists?
-        }
-      end
-    end
+    render json: {
+      m3u8_exists: m3u8_exists?
+    }
   end
 
   private
