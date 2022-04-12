@@ -12,7 +12,7 @@ class StreamWorker
   private
   def create_m3u8 audio_file
     `ffmpeg -y \
-    -i #{audio_file.file.path} \
+    -i #{audio_file.temp_file} \
     -codec copy \
     -loglevel 0 \
     -map 0 \
