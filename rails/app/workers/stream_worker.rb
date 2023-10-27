@@ -19,7 +19,7 @@ class StreamWorker
     -f hls \
     -hls_time 10 \
     -hls_playlist_type vod \
-    -hls_segment_filename "/tmp/hls/#{audio_file.id}_%d.ts" \
-    "/tmp/hls/#{audio_file.id}.m3u8"`
+    -hls_segment_filename "/data/#{audio_file.id}_%d.ts" \
+    "/data/#{audio_file.id}.m3u8"`
   end
 end
