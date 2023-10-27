@@ -13,7 +13,7 @@ RUN apt-get install -yqq sudo
 RUN echo "$USER ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # entrypoint
-COPY .gitlab/docker/app/entrypoint.sh /usr/bin/
+COPY .docker/entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
 WORKDIR /app
