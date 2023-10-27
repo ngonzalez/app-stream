@@ -39,7 +39,7 @@ RUN su -c "bundle install" $USER
 
 ENTRYPOINT []
 
-ARG puma_port="3000"
+ARG puma_port="5000"
 ENV PUMA_PORT $puma_port
 
 EXPOSE $PUMA_PORT
