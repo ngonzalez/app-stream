@@ -12,7 +12,7 @@ test:
 
 development:
   <<: *local-defaults
-  database: <%= "#{POSTGRESQL_DB}" %>
+  database: <%= "#{POSTGRESQL_DB}_dev" %>
 
 production:
   <<: *local-defaults
