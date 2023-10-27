@@ -58,33 +58,3 @@ if ENV['REDIS_DB'].present?
 else
   raise "Missing ENV REDIS_DB"
 end
-
-# GCP_APP
-if ENV['GCP_PROJECT_ID'].present?
-  GCP_PROJECT_ID = ENV['GCP_PROJECT_ID']
-else
-  raise "Missing ENV GCP_PROJECT_ID"
-end
-
-# GCP_BUCKET
-if ENV['GCP_BUCKET_NAME'].present?
-  GCP_BUCKET_NAME = ENV['GCP_BUCKET_NAME']
-else
-  raise "Missing ENV GCP_BUCKET_NAME"
-end
-
-# GCP_CONFIG_PATH
-if ENV['GCP_CONFIG_PATH'].present?
-  GCP_CONFIG_PATH = ENV['GCP_CONFIG_PATH']
-else
-  raise "Missing ENV GCP_CONFIG_PATH"
-end
-
-# GCP_ROOT_PATH
-if ENV['GCP_ROOT_PATH'].present?
-  GCP_ROOT_PATH = ENV['GCP_ROOT_PATH']
-else
-  raise "Missing ENV GCP_ROOT_PATH"
-end
-
-ALLOWED_AUDIO_FORMATS   = YAML.load_file File.expand_path('../config/yaml/allowed_audio_formats.yaml', __dir__)
