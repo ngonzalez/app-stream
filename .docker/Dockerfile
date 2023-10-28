@@ -18,7 +18,7 @@ RUN chmod +x /usr/bin/entrypoint.sh
 
 WORKDIR /app
 
-COPY ../../rails .
+COPY ../rails .
 
 RUN chown -R $USER: /app
 
