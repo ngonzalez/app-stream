@@ -1,10 +1,10 @@
 class AudioFileDecorator < Draper::Decorator
   delegate_all
   def m3u8_path
-    "/#{HLS_TMP_FOLDER}/#{object.id}.m3u8"
+    "/data/#{object.id}.m3u8"
   end
   def temp_file
-    "/#{HLS_TMP_FOLDER}/#{file_name}"
+    "/data/#{file_name}"
   end
   def file_name
     '%s.%s' % [object.id, format_name.downcase]
