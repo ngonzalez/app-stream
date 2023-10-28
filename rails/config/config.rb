@@ -58,3 +58,5 @@ if ENV['REDIS_DB'].present?
 else
   raise "Missing ENV REDIS_DB"
 end
+
+ALLOWED_AUDIO_FORMATS   = YAML.load_file File.expand_path('../config/yaml/allowed_audio_formats.yaml', __dir__)
