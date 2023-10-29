@@ -1,7 +1,7 @@
 module RedisDb
   class << self
     def client
-      @client ||= Redis.new url: "redis://#{REDIS_HOST}:#{REDIS_PORT}/#{REDIS_DB}"
+      @client ||= Redis.new host: REDIS_HOST, port: REDIS_PORT, db: REDIS_DB
     end
   end
 end
