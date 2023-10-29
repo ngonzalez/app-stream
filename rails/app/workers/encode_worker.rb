@@ -4,7 +4,7 @@ class EncodeWorker
 
   def perform audio_file_id
     audio_file = AudioFile.find(audio_file_id).decorate
-    return if File.exists?(audio_file.temp_file)
+    return if File.exist?(audio_file.temp_file)
     file = Down.download("http://192.168.1.12:8080/#{BACKUP_SERVER_FOLDER}/#{audio_file.path}")
     strip_metadata(file.path, audio_file.temp_file) if ['AAC', 'ALAC', 'MP3'].include?(audio_file.format_name)
     encode(file.path, audio_file.temp_file) if ['AIFF', 'WAV'].include?(audio_file.format_name)

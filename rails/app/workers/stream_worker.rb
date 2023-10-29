@@ -4,7 +4,7 @@ class StreamWorker
 
   def perform audio_file_id
     audio_file = AudioFile.find(audio_file_id).decorate
-    return if File.exists?(audio_file.m3u8_path)
+    return if File.exist?(audio_file.m3u8_path)
     create_m3u8(audio_file)
     RedisDb.client.del("stream:#{audio_file.id}")
   end

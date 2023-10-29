@@ -16,7 +16,7 @@ class AudioFilesController < ApplicationController
 
   def file_exists?
     RedisDb.client.get("file:#{@audio_file.id}").nil? &&
-      File.exists?(@audio_file.decorate.temp_file)
+      File.exist?(@audio_file.decorate.temp_file)
   end
 
   def encode_file
@@ -28,7 +28,7 @@ class AudioFilesController < ApplicationController
 
   def m3u8_exists?
     RedisDb.client.get("stream:#{@audio_file.id}").nil? &&
-      File.exists?(@audio_file.decorate.m3u8_path)
+      File.exist?(@audio_file.decorate.m3u8_path)
   end
 
   def create_m3u8
