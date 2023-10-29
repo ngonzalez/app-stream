@@ -14,7 +14,7 @@ RUN echo "$USER ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # systemd
 RUN apt-get install -yq --no-install-recommends systemd systemd-sysv
-FROM debian:${TAG}
+FROM ruby:3.3-rc-bookworm
 COPY --from=0 / /
 ENV container docker
 STOPSIGNAL SIGRTMIN+3
