@@ -6,7 +6,8 @@ function usage {
 }
 
 function start_puma {
-    su -c "bundle exec puma -e $RAILS_ENV -p $PUMA_PORT" $USER
+    systemctl start puma
+    systemctl start sidekiq
 }
 
 if [ "$1" != "" ]; then

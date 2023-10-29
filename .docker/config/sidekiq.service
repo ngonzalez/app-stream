@@ -1,0 +1,21 @@
+[Unit]
+After=network.target
+Description=Simple, efficient background processing for Ruby.
+Documentation=https://github.com/ngonzalez
+
+[Service]
+Type=simple
+WorkingDirectory=/app
+ExecStart=/usr/local/bundle/bin/bundle exec sidekiq -e $RAILS_ENV
+EnvironmentFile=/tmp/secrets/.env
+PIDFile=/app/tmp/pids/sidekiq.pid
+Restart=always
+User=$USER
+Group=$USER
+SyslogIdentifier=sidekiq
+LimitNOFILE=65535
+TimeoutStopSec=0
+
+[Install]
+WantedBy=multi-user.target
+Alias=sidekiq.service

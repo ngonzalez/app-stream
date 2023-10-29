@@ -1,0 +1,21 @@
+[Unit]
+After=network.target
+Description=Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications.
+Documentation=https://github.com/ngonzalez
+
+[Service]
+Type=simple
+WorkingDirectory=/app
+ExecStart=/usr/local/bundle/bin/bundle exec puma -C config/puma.rb -e $RAILS_ENV -p $PUMA_PORT -b unix:///tmp/puma.sock
+EnvironmentFile=/tmp/secrets/.env
+PIDFile=/app/tmp/pids/puma.pid
+Restart=always
+User=$USER
+Group=$USER
+SyslogIdentifier=puma
+LimitNOFILE=65535
+TimeoutStopSec=0
+
+[Install]
+WantedBy=multi-user.target
+Alias=puma.service
