@@ -12,16 +12,6 @@ RUN useradd -m $USER -s /bin/bash
 RUN apt-get install -yqq sudo
 RUN echo "$USER ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# systemd
-RUN apt-get install -yq --no-install-recommends systemd systemd-sysv
-FROM ruby:3.3-rc-bookworm
-COPY --from=0 / /
-ENV container docker
-STOPSIGNAL SIGRTMIN+3
-VOLUME [ "/sys/fs/cgroup", "/run", "/run/lock" ]
-
-WORKDIR /app
-
 # systemd: puma, sidekiq
 RUN cp -f .docker/config/puma.service /etc/systemd/system/puma.service
 RUN cp -f .docker/config/puma.target /etc/systemd/system/puma.target
@@ -32,6 +22,16 @@ RUN systemctl daemon-reload
 # entrypoint
 COPY .docker/entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
+
+# systemd
+RUN apt-get install -yq --no-install-recommends systemd systemd-sysv
+FROM ruby:3.3-rc-bookworm
+COPY --from=0 / /
+ENV container docker
+STOPSIGNAL SIGRTMIN+3
+VOLUME [ "/sys/fs/cgroup", "/run", "/run/lock" ]
+
+WORKDIR /app
 
 COPY ../rails .
 
