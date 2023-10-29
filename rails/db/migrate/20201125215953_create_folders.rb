@@ -15,9 +15,7 @@ class CreateFolders < ActiveRecord::Migration[7.0]
       t.datetime :folder_updated_at
       t.string :data_url
       t.index [:data_url], name: :index_folders_on_data_url, unique: true
-      t.index [:folder], name: :index_folders_on_folder, unique: true
       t.index [:name], name: :index_folders_on_name, unique: true
-      t.index [:subfolder], name: :index_folders_on_subfolder, unique: true
     end
   end
 end
