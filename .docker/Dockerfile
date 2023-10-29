@@ -29,7 +29,7 @@ ARG RAILS_LOG_TO_STDOUT="true"
 ENV RAILS_LOG_TO_STDOUT $RAILS_LOG_TO_STDOUT
 
 # apt dependencies
-RUN apt-get install -yq libtag1-dev
+RUN apt-get install -yq ffmpeg lame libtag1-dev
 
 # bundler
 ARG BUNDLER_VERSION="2.4.20"
