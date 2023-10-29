@@ -20,6 +20,8 @@ ENV container docker
 STOPSIGNAL SIGRTMIN+3
 VOLUME [ "/sys/fs/cgroup", "/run", "/run/lock" ]
 
+WORKDIR /app
+
 # systemd: puma, sidekiq
 RUN cp -f .docker/config/puma.service /etc/systemd/system/puma.service
 RUN cp -f .docker/config/puma.target /etc/systemd/system/puma.target
@@ -30,8 +32,6 @@ RUN systemctl daemon-reload
 # entrypoint
 COPY .docker/entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
-
-WORKDIR /app
 
 COPY ../rails .
 
