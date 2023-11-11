@@ -9,9 +9,6 @@ class AudioFileDecorator < Draper::Decorator
   def file_name
     '%s.%s' % [object.id, format_name.downcase]
   end
-  def public_path
-    "#{BACKUP_SERVER_PATH}/#{path}"
-  end
   def path
     [folder.decorate.path, object.name].join "/"
   end
